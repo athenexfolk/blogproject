@@ -17,4 +17,8 @@ export class PostService {
     return this.http.get<Post[]>(`${this.url}/posts`);
   }
 
+  public getContent(id:number){
+    return this.http.get<Post>(`${this.url}/post/${id}`);
+  }
+
 }

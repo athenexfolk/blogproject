@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/models/post';
 
@@ -12,8 +13,11 @@ export class HomeComponent implements OnInit {
   public posts!:Post[];
 
   constructor(
-    private $post:PostService
-  ) { }
+    private $post:PostService,
+    private titleService:Title
+  ) {
+    titleService.setTitle("All Post");
+  }
 
   ngOnInit(): void {
 
