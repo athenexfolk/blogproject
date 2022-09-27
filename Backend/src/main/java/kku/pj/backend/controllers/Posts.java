@@ -18,6 +18,7 @@ public class Posts {
 
 
     @GetMapping("posts")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> getPost(@RequestParam Optional<Integer> id, @RequestParam Optional<Integer> optional_n){
 
         Integer n = optional_n.orElse(20);
