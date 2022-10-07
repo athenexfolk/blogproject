@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Post } from 'src/models/post';
+import { Post } from 'src/models/post.request.model';
 
 @Component({
   selector: 'app-home',
