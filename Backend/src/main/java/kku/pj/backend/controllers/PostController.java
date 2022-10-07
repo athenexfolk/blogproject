@@ -1,7 +1,7 @@
 package kku.pj.backend.controllers;
 
 import kku.pj.backend.dto.PostContentDto;
-import kku.pj.backend.models.PostThumbnail;
+import kku.pj.backend.dto.PostThumbnailDto;
 import kku.pj.backend.entities.Post;
 import kku.pj.backend.services.PostService;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
@@ -31,13 +31,13 @@ public class PostController {
 
 
     @GetMapping("posts")
-    public List<PostThumbnail> getAllPost(){
+    public List<PostThumbnailDto> getAllPost(){
         return postService.getPostsTrumbull();
     }
 
 
     @GetMapping("posts/{offset}/{size}")
-    public Page<PostThumbnail> getPosts(
+    public Page<PostThumbnailDto> getPosts(
             @PathVariable int offset,
             @PathVariable int size,
             @RequestParam Optional<String> sortBy,

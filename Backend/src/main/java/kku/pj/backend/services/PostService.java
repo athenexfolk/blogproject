@@ -1,7 +1,7 @@
 package kku.pj.backend.services;
 
 import kku.pj.backend.dto.PostContentDto;
-import kku.pj.backend.models.PostThumbnail;
+import kku.pj.backend.dto.PostThumbnailDto;
 import kku.pj.backend.entities.Post;
 import kku.pj.backend.repositories.PostRepository;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
@@ -26,7 +26,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<PostThumbnail> getPostsTrumbull(){
+    public List<PostThumbnailDto> getPostsTrumbull(){
         return postRepository.findAllThumbnail();
     }
 
@@ -34,7 +34,7 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public Page<PostThumbnail> getPosts(int offset, int size, Optional<String> sortByField, Optional<Direction> sortDirection){
+    public Page<PostThumbnailDto> getPosts(int offset, int size, Optional<String> sortByField, Optional<Direction> sortDirection){
         Sort sort = Sort.by(sortDirection.orElse(Direction.DESC), sortByField.orElse("id"));
         Pageable pageable = PageRequest.of(offset, size, sort);
 
