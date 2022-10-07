@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/models/post';
 
 @Component({
@@ -13,19 +12,13 @@ export class HomeComponent implements OnInit {
   public posts!:Post[];
 
   constructor(
-    private $post:PostService,
     private titleService:Title
   ) {
-    titleService.setTitle("All Post");
+    titleService.setTitle("Home");
   }
 
   ngOnInit(): void {
 
-    this.$post.getAll().subscribe(
-      posts=>{
-        this.posts = posts;
-      }
-    )
 
   }
 
