@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-post-editor-area',
   templateUrl: './post-editor-area.component.html',
@@ -7,9 +6,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostEditorAreaComponent implements OnInit {
 
+
+  
   constructor() { }
 
   ngOnInit(): void {
+    
   }
+
+  
 
 }
