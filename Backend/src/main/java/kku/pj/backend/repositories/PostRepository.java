@@ -1,6 +1,6 @@
 package kku.pj.backend.repositories;
 
-import kku.pj.backend.dto.PostThumbnailDto;
+import kku.pj.backend.models.PostThumbnail;
 import kku.pj.backend.entities.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +13,12 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post,Integer> {
 
-    public Page<Post> findAll(Pageable pageable);
+    Page<Post> findAll(Pageable pageable);
 
-    @Query("select new kku.pj.backend.dto.PostThumbnailDto(p.id,p.title,p.create_at,p.user_id) from Post p")
-    public List<PostThumbnailDto> findAllThumbnail();
+    @Query("select new kku.pj.backend.models.PostThumbnail(p.id,p.title,p.create_at,p.user_id) from Post p")
+    List<PostThumbnail> findAllThumbnail();
 
-    @Query("select new kku.pj.backend.dto.PostThumbnailDto(p.id,p.title,p.create_at,p.user_id) from Post p")
-    public Page<PostThumbnailDto> findAllThumbnail(Pageable pageable);
+    @Query("select new kku.pj.backend.models.PostThumbnail(p.id,p.title,p.create_at,p.user_id) from Post p")
+    Page<PostThumbnail> findAllThumbnail(Pageable pageable);
 
 }

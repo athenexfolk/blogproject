@@ -1,11 +1,11 @@
-package kku.pj.backend.dto;
+package kku.pj.backend.models;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class PostThumbnailDto {
+public class PostThumbnail {
     private final Integer id;
     private final String title;
     private final Date create_at;
