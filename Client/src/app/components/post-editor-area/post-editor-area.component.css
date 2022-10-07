@@ -1,0 +1,11 @@
+.title-area{
+    border: none;
+    caret-color: grey;
+    resize: none;
+    font-size: 1.5em;
+
+}
+.title-area:focus {
+    border: none;
+    box-shadow: none;
+}

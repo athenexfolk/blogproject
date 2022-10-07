@@ -19,3 +19,7 @@
     top: 50%;
     transform: translate(-50%,-50%);
 }
+.active{
+    background-color: rgb(112, 112, 112);
+    color: white !important;
+}
