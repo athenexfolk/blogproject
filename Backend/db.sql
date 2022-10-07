@@ -10,11 +10,11 @@ create table if not exists Users(
 
 create table if not exists Posts(
     id int not null AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    content TEXT,
+    title VARCHAR(255) NOT null,
+    content TEXT ,
     create_at DATETIME not NULL DEFAULT CURRENT_TIMESTAMP,
     modified_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
-    user_id VARCHAR(100),
+    user_id VARCHAR(100) NOT NULL,
     CONSTRAINT FK_UserPost FOREIGN KEY (user_id)
     REFERENCES Users(username)
 );
@@ -24,5 +24,17 @@ INSERT INTO Users(username,password,email) VALUES
     ("aniruts","123",""),
     ("Phantom","abc","vill@a.com") ;
 INSERT INTO Posts(id,title,content,user_id) VALUES
-    ( null, "eiei", "Hello world", "aniruts")
+    ( null, "1post", "Hello world", "aniruts"),
+    ( null, "2post", "Hello world", "aniruts"),
+    ( null, "3post", "Hello world", "aniruts"),
+    ( null, "4post", "Hello world", "aniruts"),
+    ( null, "5post", "Hello world", "aniruts")
 ;
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=== */
+CREATE Table tmp
+(
+    id int PRIMARY KEY,
+    name VARCHAR(100),
+    ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
