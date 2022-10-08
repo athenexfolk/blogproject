@@ -12,6 +12,7 @@ import { PostEditorAreaComponent } from './components/post-editor-area/post-edit
 import { BodyComponent } from './components/body/body.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     PostEditorAreaComponent,
     BodyComponent,
     NotificationComponent,
-    ProfileComponent
+    ProfileComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
