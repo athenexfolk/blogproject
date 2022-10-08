@@ -7,6 +7,7 @@ import kku.pj.backend.repositories.UserRepository;
 import kku.pj.backend.services.exceptions.UsernameIsExistException;
 import kku.pj.backend.services.exceptions.UsernameIsNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +20,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
+@Qualifier("UserService")
 public class UserService implements IUserService, UserDetailsService {
 
     private final UserRepository userRepository;

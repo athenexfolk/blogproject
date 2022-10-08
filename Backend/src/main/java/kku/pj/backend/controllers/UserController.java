@@ -4,10 +4,12 @@ import kku.pj.backend.dto.UserDto;
 import kku.pj.backend.dto.UserRegisterDto;
 import kku.pj.backend.dto.UserUpdatableDto;
 import kku.pj.backend.entities.User;
+import kku.pj.backend.services.IUserService;
 import kku.pj.backend.services.UserService;
 import kku.pj.backend.services.exceptions.UsernameIsExistException;
 import kku.pj.backend.services.exceptions.UsernameIsNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
@@ -21,10 +23,10 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(@Qualifier("UserService") IUserService userService) {
         this.userService = userService;
     }
 

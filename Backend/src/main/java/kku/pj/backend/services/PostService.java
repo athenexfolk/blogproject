@@ -6,6 +6,7 @@ import kku.pj.backend.entities.Post;
 import kku.pj.backend.repositories.PostRepository;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,24 +18,37 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Qualifier("PostService")
 public class PostService implements IPostService {
 
-    final PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
+
+
+
     @Override
     public List<PostThumbnailDto> getPostsTrumbull(){
         return postRepository.findAllThumbnail();
     }
 
+
+
+
+
     @Override
     public Optional<Post> getPost(int id){
         return postRepository.findById(id);
     }
+
+
+
+
+
 
     @Override
     public Page<PostThumbnailDto> getPosts(int offset, int size, Optional<String> sortByField, Optional<Direction> sortDirection){
@@ -44,11 +58,19 @@ public class PostService implements IPostService {
         return postRepository.findAllThumbnail(pageable);
     }
 
+
+
+
+
     @Override
     public Post addPost(Post post){
         post = postRepository.save(post);
         return post;
     }
+
+
+
+
 
     @Override
     public Post updatePost(int id, PostContentDto postContentDto) throws PostIdNotFoundException {
@@ -67,6 +89,10 @@ public class PostService implements IPostService {
     }
 
 
+
+
+
+
     @Override
     public void removePost(int id) throws PostIdNotFoundException {
         try{
@@ -75,5 +101,15 @@ public class PostService implements IPostService {
             throw new PostIdNotFoundException(String.format("Post ID %d is not exist.",id));
         }
     }
+
+
+
+
+
+
+
+
+
+
 
 }

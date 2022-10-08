@@ -4,9 +4,9 @@ import kku.pj.backend.dto.PostContentDto;
 import kku.pj.backend.dto.PostThumbnailDto;
 import kku.pj.backend.entities.Post;
 import kku.pj.backend.services.IPostService;
-import kku.pj.backend.services.PostService;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,7 @@ import java.util.Optional;
 
 
 // HTTP methods document https://www.restapitutorial.com/lessons/httpmethods.html
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin("*")
@@ -26,7 +27,7 @@ public class PostController {
     private final IPostService postService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(@Qualifier("PostService") IPostService postService) {
         this.postService = postService;
     }
 
