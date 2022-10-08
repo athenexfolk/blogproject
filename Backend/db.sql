@@ -19,6 +19,18 @@ create table if not exists Posts(
     REFERENCES Users(username)
 );
 
+create TABLE IF NOT EXISTS Images(
+    id VARCHAR(100) NOT NULL PRIMARY KEY,
+    alt VARCHAR(255) null,
+    name VARCHAR(50),
+    path VARCHAR(255) NOT NULL,
+    usernaem VARCHAR(100) NOT NULL,
+
+    CONSTRAINT FK_UserImage FOREIGN KEY (usernaem)
+    REFERENCES Users(Username)
+
+);
+
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 INSERT INTO Users(username,password,email) VALUES
     ("aniruts","123",""),
@@ -37,4 +49,4 @@ CREATE Table tmp
     id int PRIMARY KEY,
     name VARCHAR(100),
     ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-)
+);
