@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostService {
+public class PostService implements IPostService {
 
     final PostRepository postRepository;
 
@@ -26,14 +26,17 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+    @Override
     public List<PostThumbnailDto> getPostsTrumbull(){
         return postRepository.findAllThumbnail();
     }
 
+    @Override
     public Optional<Post> getPost(int id){
         return postRepository.findById(id);
     }
 
+    @Override
     public Page<PostThumbnailDto> getPosts(int offset, int size, Optional<String> sortByField, Optional<Direction> sortDirection){
         Sort sort = Sort.by(sortDirection.orElse(Direction.DESC), sortByField.orElse("id"));
         Pageable pageable = PageRequest.of(offset, size, sort);
@@ -41,11 +44,13 @@ public class PostService {
         return postRepository.findAllThumbnail(pageable);
     }
 
+    @Override
     public Post addPost(Post post){
         post = postRepository.save(post);
         return post;
     }
 
+    @Override
     public Post updatePost(int id, PostContentDto postContentDto) throws PostIdNotFoundException {
         Optional<Post> post = postRepository.findById(id);
 
@@ -62,6 +67,7 @@ public class PostService {
     }
 
 
+    @Override
     public void removePost(int id) throws PostIdNotFoundException {
         try{
             postRepository.deleteById(id);

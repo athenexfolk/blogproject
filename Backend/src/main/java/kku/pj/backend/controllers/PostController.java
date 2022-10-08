@@ -3,6 +3,7 @@ package kku.pj.backend.controllers;
 import kku.pj.backend.dto.PostContentDto;
 import kku.pj.backend.dto.PostThumbnailDto;
 import kku.pj.backend.entities.Post;
+import kku.pj.backend.services.IPostService;
 import kku.pj.backend.services.PostService;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class PostController {
 
-    final PostService postService;
+    private final IPostService postService;
 
     @Autowired
     public PostController(PostService postService) {

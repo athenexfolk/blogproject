@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements IUserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -30,6 +30,7 @@ public class UserService implements UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    @Override
     public User addUser(UserRegisterDto userRegisterDto) throws UsernameIsExistException {
         Optional<User> user = userRepository.findById(userRegisterDto.getUsername());
         if(user.isEmpty()) {
@@ -42,10 +43,12 @@ public class UserService implements UserDetailsService {
         throw new UsernameIsExistException(String.format("Username %s is exist",userRegisterDto.getUsername()));
     }
 
+    @Override
     public Optional<User> findUser(String username){
         return userRepository.findById(username);
     }
 
+    @Override
     public User updateUser(String username, UserUpdatableDto userUpdatableDto) throws UsernameIsNotExistException {
         var user = userRepository.findById(username);
         if(user.isEmpty())
