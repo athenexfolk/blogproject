@@ -6,6 +6,7 @@ import { IPostService } from './IPostService';
 
 import { environment } from '../../environments/environment';
 import { User } from 'src/models/user.request.model';
+import { url } from 'inspector';
 
 
 @Injectable({
@@ -17,6 +18,11 @@ export class PostService implements IPostService {
     private http : HttpClient
   ) { }
 
+
+  getAllPost():Observable<PostContent[]>{
+    const url = this.getAction(`posts`)
+    return this.http.get<PostContent[]>(url)
+  }
 
   getPostThumbnailPagination(page: number, size: number): Observable<PostPagination> {
     const header={
