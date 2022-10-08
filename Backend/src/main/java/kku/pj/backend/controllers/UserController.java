@@ -5,9 +5,9 @@ import kku.pj.backend.dto.UserRegisterDto;
 import kku.pj.backend.dto.UserUpdatableDto;
 import kku.pj.backend.entities.User;
 import kku.pj.backend.services.IUserService;
-import kku.pj.backend.services.UserService;
 import kku.pj.backend.services.exceptions.UsernameIsExistException;
 import kku.pj.backend.services.exceptions.UsernameIsNotExistException;
+import kku.pj.backend.utills.InitialUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -67,7 +67,6 @@ public class UserController {
 
     @GetMapping("myprofile")
     @ResponseBody
-//    public ResponseEntity<UserDto> profile(
     public Object profile(
             @CurrentSecurityContext SecurityContext securityContext
     ){

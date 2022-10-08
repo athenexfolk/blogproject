@@ -2,8 +2,9 @@ package kku.pj.backend.security;
 
 import kku.pj.backend.fillter.CustomAuthenticationFilter;
 import kku.pj.backend.fillter.CustomAuthorizationFilter;
+import kku.pj.backend.services.IJWTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,16 +22,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final String secret_key;
+    private final IJWTokenService jwtService;
 
     @Autowired
     public SecurityConfig(
             UserDetailsService userDetailsService,
             BCryptPasswordEncoder bCryptPasswordEncoder,
-            @Value("${JWT.secret_key}") String secret_key) {
+            @Qualifier("JWTokenService") IJWTokenService jwtService
+    ) {
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.secret_key = secret_key;
+        this.jwtService = jwtService;
     }
 
 
@@ -45,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(
-                authenticationManagerBean(),
-                secret_key
+                authenticationManagerBean(), jwtService
         );
 
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
@@ -55,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().anyRequest().permitAll();
         http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore(new CustomAuthorizationFilter(secret_key) ,CustomAuthenticationFilter.class);
+        http.addFilterBefore(new CustomAuthorizationFilter(jwtService) ,CustomAuthenticationFilter.class);
     }
 
     @Bean
