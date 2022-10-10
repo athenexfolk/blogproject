@@ -1,7 +1,7 @@
-package kku.pj.backend.repositories;
+package kku.pj.backend.repositories.V1;
 
 import kku.pj.backend.dto.PostThumbnailDto;
-import kku.pj.backend.entities.Post;
+import kku.pj.backend.entities.V1.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

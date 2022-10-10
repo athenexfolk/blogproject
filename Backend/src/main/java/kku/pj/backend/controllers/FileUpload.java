@@ -1,7 +1,7 @@
 package kku.pj.backend.controllers;
 
-import kku.pj.backend.entities.Image;
-import kku.pj.backend.services.IImageService;
+import kku.pj.backend.entities.V1.Image;
+import kku.pj.backend.services.V1.IImageService;
 import kku.pj.backend.utills.Author;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;

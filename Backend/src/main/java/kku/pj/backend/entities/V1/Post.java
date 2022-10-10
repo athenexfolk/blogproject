@@ -1,4 +1,4 @@
-package kku.pj.backend.entities;
+package kku.pj.backend.entities.V1;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

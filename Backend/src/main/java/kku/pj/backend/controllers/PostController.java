@@ -2,8 +2,8 @@ package kku.pj.backend.controllers;
 
 import kku.pj.backend.dto.PostContentDto;
 import kku.pj.backend.dto.PostThumbnailDto;
-import kku.pj.backend.entities.Post;
-import kku.pj.backend.services.IPostService;
+import kku.pj.backend.entities.V1.Post;
+import kku.pj.backend.services.V1.IPostService;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

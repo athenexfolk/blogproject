@@ -1,6 +1,6 @@
 package kku.pj.backend.dto;
 
-import kku.pj.backend.entities.User;
+import kku.pj.backend.entities.V1.User;
 import lombok.Data;
 
 import java.io.Serializable;

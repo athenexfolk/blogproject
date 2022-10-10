@@ -1,6 +1,6 @@
-package kku.pj.backend.repositories;
+package kku.pj.backend.repositories.V1;
 
-import kku.pj.backend.entities.User;
+import kku.pj.backend.entities.V1.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -50,3 +50,93 @@ CREATE Table tmp
     name VARCHAR(100),
     ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* V2 */
+SET FOREIGN_KEY_CHECKS = 0;
+    DROP TABLE IF EXISTS User;
+    DROP TABLE IF EXISTS Image;
+    DROP TABLE IF EXISTS Post;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE Table User(
+    username VARCHAR(100) NOT NULL ,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    imgId int,
+    create_at DATETIME not NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT PK_User PRIMARY KEY(username)
+);
+
+CREATE Table Image(
+    imgId int NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    name VARCHAR(255),
+    alt VARCHAR(255),
+    url VARCHAR(255) NOT NULL,
+    
+    CONSTRAINT FK_ImageOfUser FOREIGN KEY(username)
+    REFERENCES User(username),
+    CONSTRAINT PK_Image PRIMARY KEY(imgId)
+);
+
+ALTER TABLE User
+    ADD CONSTRAINT PK_UserImage
+    FOREIGN KEY(username,imgId)
+    REFERENCES Image(username,imgId);
+
+CREATE Table Post(
+    postId int NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    imgId INT,
+    title VARCHAR(255),
+    content TEXT,
+    short_content TEXT,
+    create_at DATETIME not NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
+    
+    CONSTRAINT PK_Post PRIMARY KEY(postID),
+    CONSTRAINT FK_PostUser FOREIGN KEY(username) REFERENCES User(username),
+    CONSTRAINT FK_PostImage FOREIGN KEY(imgId) REFERENCES Image(imgId)
+);
+
+
+INSERT INTO User (username,password,email,imgId) VALUES
+    ( "villium","password","a@com",null)
+;
+INSERT INTO Image VALUES
+    ( null,"villium", "profile",null,"null")
+;
+INSERT INTO Post (postId,username,imgId,title,content,short_content)  VALUES
+    ( null, "villium", 1, "hey","content","cont")
+    ;

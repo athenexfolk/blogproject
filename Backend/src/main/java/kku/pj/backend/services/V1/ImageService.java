@@ -1,7 +1,7 @@
-package kku.pj.backend.services;
+package kku.pj.backend.services.V1;
 
-import kku.pj.backend.entities.Image;
-import kku.pj.backend.repositories.ImageRepository;
+import kku.pj.backend.entities.V1.Image;
+import kku.pj.backend.repositories.V1.ImageRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

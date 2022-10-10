@@ -1,6 +1,6 @@
 package kku.pj.backend.dto;
 
-import kku.pj.backend.entities.Post;
+import kku.pj.backend.entities.V1.Post;
 import lombok.Data;
 
 @Data

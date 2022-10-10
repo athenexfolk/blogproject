@@ -1,6 +1,6 @@
-package kku.pj.backend.services;
+package kku.pj.backend.services.V1;
 
-import kku.pj.backend.entities.Image;
+import kku.pj.backend.entities.V1.Image;
 
 import java.io.IOException;
 

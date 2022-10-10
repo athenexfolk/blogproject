@@ -2,7 +2,7 @@ package kku.pj.backend.fillter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import kku.pj.backend.services.IJWTokenService;
+import kku.pj.backend.services.V1.IJWTokenService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

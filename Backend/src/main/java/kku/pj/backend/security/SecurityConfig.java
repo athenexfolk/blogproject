@@ -2,7 +2,7 @@ package kku.pj.backend.security;
 
 import kku.pj.backend.fillter.CustomAuthenticationFilter;
 import kku.pj.backend.fillter.CustomAuthorizationFilter;
-import kku.pj.backend.services.IJWTokenService;
+import kku.pj.backend.services.V1.IJWTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package kku.pj.backend.services;
+package kku.pj.backend.services.V1;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
