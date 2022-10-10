@@ -1,9 +1,13 @@
 package kku.pj.backend.controllers;
 
+import kku.pj.backend.entities.Image;
 import kku.pj.backend.services.IImageService;
+import kku.pj.backend.utills.Author;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,23 +19,37 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class FileUpload {
     private final IImageService imageService;
+    private final Author author;
 
     public FileUpload(
-            @Qualifier("ImageService") IImageService imageService
+            @Qualifier("ImageService") IImageService imageService,
+            Author author
     ) {
         this.imageService = imageService;
+        this.author = author;
     }
 
 
     @PostMapping(value = "/upload/image" )
-    public ResponseEntity<String> uplaodImage(@RequestParam("image") Optional<MultipartFile> file) {
-        if(file.isEmpty()) return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+    public ResponseEntity<Image> uplaodImage(
+            @RequestParam("image") Optional<MultipartFile> file,
+            @RequestParam Optional<String> atl,
+            @RequestParam Optional<String> name,
+            @CurrentSecurityContext SecurityContext securityContext
+    ) {
         String type = file.get().getContentType();
-        if(!type.contains("image/")) return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        String username = author.getUsernameFromContext(securityContext);
+
+        if(file.isEmpty() || !type.contains("image/"))
+            return  new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+
+        if(username == "anonymousUser")
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         try {
-            return ResponseEntity.ok(imageService.byteArrayToImage(file.get().getBytes(),type));
+            var imageRespond = imageService.addImage( file.get().getBytes(), type, name.get(), atl.get(), username );
+            return ResponseEntity.ok(imageRespond);
+
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

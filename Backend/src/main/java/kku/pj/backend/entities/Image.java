@@ -20,6 +20,8 @@ public class Image {
     private long id;
     private String alt;
     private String name;
+    @Column(nullable = false)
     private String path;
+    @Column(nullable = false)
     private String username;
 }

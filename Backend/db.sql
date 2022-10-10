@@ -20,13 +20,13 @@ create table if not exists Posts(
 );
 
 create TABLE IF NOT EXISTS Images(
-    id VARCHAR(100) NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     alt VARCHAR(255) null,
     name VARCHAR(50),
     path VARCHAR(255) NOT NULL,
-    usernaem VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
 
-    CONSTRAINT FK_UserImage FOREIGN KEY (usernaem)
+    CONSTRAINT FK_UserImage FOREIGN KEY (username)
     REFERENCES Users(Username)
 
 );

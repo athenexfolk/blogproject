@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 public class UtilsConfig {
     @Bean
     @Scope("singleton")
-    InitialUtil getInitialUtil(){
-        return new InitialUtil();
+    Author getInitialUtil(){
+        return new Author();
     }
 }
