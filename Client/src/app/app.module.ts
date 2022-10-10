@@ -13,6 +13,7 @@ import { BodyComponent } from './components/body/body.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostComponent } from './components/post/post.component';
+import { AddTextComponent } from './components/tools/add-text/add-text.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PostComponent } from './components/post/post.component';
     BodyComponent,
     NotificationComponent,
     ProfileComponent,
-    PostComponent
+    PostComponent,
+    AddTextComponent
   ],
   imports: [
     BrowserModule,
