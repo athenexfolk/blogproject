@@ -112,8 +112,8 @@ CREATE Table Image(
 
 ALTER TABLE User
     ADD CONSTRAINT PK_UserImage
-    FOREIGN KEY(username,imgId)
-    REFERENCES Image(username,imgId);
+    FOREIGN KEY(imgId)
+    REFERENCES Image(imgId);
 
 CREATE Table Post(
     postId int NOT NULL AUTO_INCREMENT,

@@ -1,4 +1,4 @@
-package kku.pj.backend.controllers;
+package kku.pj.backend.controllers.V1;
 
 import kku.pj.backend.entities.V1.Image;
 import kku.pj.backend.services.V1.IImageService;

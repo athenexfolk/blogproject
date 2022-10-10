@@ -4,10 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,6 +17,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
     private String email;
+    @Column(nullable = true)
     private Integer imgId;
 
 
@@ -30,4 +28,10 @@ public class UserEntity {
     @Column(nullable = false)
     @UpdateTimestamp
     private Date modified_at;
+
+
+    @OneToOne
+    @JoinColumn(name = "imgId",nullable = true, updatable = false, insertable = false)
+    private ImageEntity imageEntity;
+
 }

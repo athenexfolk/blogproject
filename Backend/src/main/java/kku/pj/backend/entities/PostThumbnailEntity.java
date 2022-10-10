@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "Post")
-public class PostEntity {
+public class PostThumbnailEntity {
     @Id
     @Column(name = "postId", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,6 @@ public class PostEntity {
     @Column(nullable = true)
     private Integer imgId;
     private String title;
-    private String content;
 
     @Column(name = "short_content")
     private String shortContent;

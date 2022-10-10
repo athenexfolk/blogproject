@@ -1,7 +1,7 @@
-package kku.pj.backend.controllers;
+package kku.pj.backend.controllers.V1;
 
-import kku.pj.backend.dto.PostContentDto;
-import kku.pj.backend.dto.PostThumbnailDto;
+import kku.pj.backend.dto.v1.PostContentDto;
+import kku.pj.backend.dto.v1.PostThumbnailDto;
 import kku.pj.backend.entities.V1.Post;
 import kku.pj.backend.services.V1.IPostService;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;

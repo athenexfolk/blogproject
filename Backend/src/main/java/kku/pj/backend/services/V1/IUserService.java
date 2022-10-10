@@ -1,7 +1,7 @@
 package kku.pj.backend.services.V1;
 
-import kku.pj.backend.dto.UserRegisterDto;
-import kku.pj.backend.dto.UserUpdatableDto;
+import kku.pj.backend.dto.v1.UserRegisterDto;
+import kku.pj.backend.dto.v1.UserUpdatableDto;
 import kku.pj.backend.entities.V1.User;
 import kku.pj.backend.services.exceptions.UsernameIsExistException;
 import kku.pj.backend.services.exceptions.UsernameIsNotExistException;

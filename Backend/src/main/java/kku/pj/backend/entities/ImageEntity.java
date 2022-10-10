@@ -19,11 +19,8 @@ public class ImageEntity {
     private String alt;
     private String url;
 
-    @Column(nullable = false)
-    @CreationTimestamp
-    private Date create_at;
 
-    @Column(nullable = false)
-    @UpdateTimestamp
-    private Date modified_at;
+    @ManyToOne
+    @JoinColumn(name = "username", nullable = false, insertable = false,updatable = false)
+    private UserEntity userEntity;
 }
