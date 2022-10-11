@@ -4,6 +4,8 @@ import kku.pj.backend.dto.ImageEntityDto;
 import kku.pj.backend.entities.ImageEntity;
 import kku.pj.backend.services.IImageService;
 import kku.pj.backend.utills.Author;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
@@ -78,6 +80,24 @@ public class FileUpload2 {
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
 
+    }
+
+
+    @GetMapping("image/{offset}/{size}")
+    public ResponseEntity<Page<ImageEntityDto>> getMyImg(
+            @PathVariable Integer offset,
+            @PathVariable Integer size,
+            @CurrentSecurityContext SecurityContext context
+    ){
+        String username = author.getUsernameFromContext(context);
+
+        if(username.equals(author.ANONYMOUS_USER))
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        var a = imageService.gets(username,offset,size,sort);
+
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
 
 

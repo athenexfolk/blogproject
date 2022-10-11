@@ -103,11 +103,17 @@ public class PostController2 {
     @ResponseBody
     public ResponseEntity<PostEntityDto> modifyPost(
             @RequestBody PostEntityInsertableDto postContentDto,
-            @PathVariable int id
+            @PathVariable int id,
+            @CurrentSecurityContext SecurityContext context
     ){
+        String username = author.getUsernameFromContext(context);
+
         try {
 
             PostEntity post = postService.get(id);
+            if(! username.equals(post.getUsername()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
             post = postContentDto.updateEntity(post);
             post = postService.update(post);
 
@@ -121,9 +127,17 @@ public class PostController2 {
 //
     @DeleteMapping("post/{id}")
     @ResponseBody
-    public ResponseEntity<Object> removePost(@PathVariable int id){
+    public ResponseEntity<Object> removePost(
+            @PathVariable int id,
+            @CurrentSecurityContext SecurityContext context
+    ){
+        String username = author.getUsernameFromContext(context);
+
         try {
             PostEntity post = postService.get(id);
+            if(! username.equals(post.getUsername()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
             postService.remove(post);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
