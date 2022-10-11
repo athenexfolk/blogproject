@@ -35,7 +35,8 @@ public class ImageService2 implements IImageService{
 
     @Override
     public ImageEntity get(Integer integer) {
-        return null;
+        var img = imageReposiroty.findById(integer);
+        return img.orElse(null);
     }
 
     @Override
@@ -45,7 +46,12 @@ public class ImageService2 implements IImageService{
 
     @Override
     public boolean remove(ImageEntity item) {
-        return false;
+        try {
+            imageReposiroty.delete(item);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
