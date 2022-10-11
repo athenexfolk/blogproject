@@ -52,7 +52,6 @@ public class PostService2 implements IPostService{
     @Override
     public Page<PostThumbnailEntityDto> getThumbnail(int page, int size, Sort sort) {
         Pageable pageable = PageRequest.of(page,size,sort);
-        System.out.println(postRepository.findAllThumbnail(pageable));
         return postRepository.findAllThumbnail(pageable);
     }
 

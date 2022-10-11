@@ -1,9 +1,12 @@
 package kku.pj.backend.services;
 
+import kku.pj.backend.dto.ImageEntityDto;
 import kku.pj.backend.entities.ImageEntity;
 import kku.pj.backend.repositories.ImageReposiroty2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +60,13 @@ public class ImageService2 implements IImageService{
     @Override
     public Page<ImageEntity> gets(int page, int size, Sort sort) {
         return null;
+    }
+
+    @Override
+    public Page<ImageEntityDto> gets(String username, int page, int size, Sort sort) {
+        Pageable pageable = PageRequest.of(page,size,sort);
+        var a = imageReposiroty.findMyImg(username, pageable);
+        return a;
     }
 
     @Override
