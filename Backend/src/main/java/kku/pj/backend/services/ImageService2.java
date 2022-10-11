@@ -2,17 +2,30 @@ package kku.pj.backend.services;
 
 import kku.pj.backend.entities.ImageEntity;
 import kku.pj.backend.repositories.ImageReposiroty2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 @Service
 public class ImageService2 implements IImageService{
+
     private final ImageReposiroty2 imageReposiroty;
+    private final String path;
 
-
-    public ImageService2(ImageReposiroty2 imageReposiroty) {
+    public ImageService2(
+            ImageReposiroty2 imageReposiroty,
+            @Value("${image.repository.path}") String path
+    ) {
         this.imageReposiroty = imageReposiroty;
+        this.path = path;
     }
 
     @Override
@@ -22,22 +35,40 @@ public class ImageService2 implements IImageService{
 
     @Override
     public ImageEntity get(Integer integer) {
-        return imageReposiroty.findById(integer).get();
+        return null;
     }
 
     @Override
     public ImageEntity update(ImageEntity item) {
-        return imageReposiroty.save(item);
+        return null;
     }
 
     @Override
     public boolean remove(ImageEntity item) {
-        imageReposiroty.delete(item);
-        return true;
+        return false;
     }
 
     @Override
     public Page<ImageEntity> gets(int page, int size, Sort sort) {
         return null;
     }
+
+    @Override
+    public String saveImgToFileSystem(byte[] data, String formatType) throws IOException {
+
+        formatType = formatType.contains("image/")?formatType.replace("image/",""):null;
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+        BufferedImage bImage2 = ImageIO.read(bis);
+
+        UUID uuid = UUID.nameUUIDFromBytes(data);
+        String path = this.path + "/" + uuid + "." + formatType; //repoPath(uuid.toString(), formatType);
+        File newFile = new File(path);
+        if(!newFile.exists())
+            ImageIO.write(bImage2, formatType,  newFile);
+
+        return path.replace("src/main/resources/static/","");
+    }
+
+
 }
