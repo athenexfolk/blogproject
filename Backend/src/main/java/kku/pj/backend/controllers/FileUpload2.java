@@ -2,7 +2,6 @@ package kku.pj.backend.controllers;
 
 import kku.pj.backend.dto.ImageEntityDto;
 import kku.pj.backend.entities.ImageEntity;
-import kku.pj.backend.entities.V1.Image;
 import kku.pj.backend.services.IImageService;
 import kku.pj.backend.utills.Author;
 import org.springframework.http.HttpStatus;
@@ -58,6 +57,26 @@ public class FileUpload2 {
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+    }
+
+
+    @DeleteMapping("delete/image/{id}")
+    public ResponseEntity deleteImage(
+            @PathVariable Integer id,
+            @CurrentSecurityContext SecurityContext context
+    ){
+        String username = author.getUsernameFromContext(context);
+        if(username.equals(author.ANONYMOUS_USER))
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+
+        ImageEntity img = imageService.get(id);
+        if( img!=null && img.getUsername().equals(username) ){
+            imageService.remove(img);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
 
     }
 
