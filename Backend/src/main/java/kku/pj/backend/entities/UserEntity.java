@@ -1,30 +1,24 @@
 package kku.pj.backend.entities;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 @Entity
-@Table(name = "Users")
-public class User {
-
+@Table(name = "User")
+public class UserEntity {
     @Id
+    @Column(nullable = false)
     private String username;
-
+    @Column(nullable = false)
     private String password;
-
     private String email;
+    @Column(nullable = true)
+    private Integer imgId;
 
 
     @Column(nullable = false)
@@ -34,4 +28,10 @@ public class User {
     @Column(nullable = false)
     @UpdateTimestamp
     private Date modified_at;
+
+
+    @OneToOne
+    @JoinColumn(name = "imgId",nullable = true, updatable = false, insertable = false)
+    private ImageEntity imageEntity;
+
 }

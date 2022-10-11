@@ -1,6 +1,6 @@
-package kku.pj.backend.dto;
+package kku.pj.backend.dto.v1;
 
-import kku.pj.backend.entities.UserEntity;
+import kku.pj.backend.entities.V1.User;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,14 +10,12 @@ public class UserRegisterDto implements Serializable {
     private final String username;
     private final String password;
     private final String email;
-    private final Integer imgId;
 
-    public UserEntity toEntity(){
-        UserEntity user = new UserEntity();
+    public User toUserEntity(){
+        User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        user.setImgId(imgId);
         return user;
     }
 }

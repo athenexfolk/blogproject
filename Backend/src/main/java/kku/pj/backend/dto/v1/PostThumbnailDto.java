@@ -1,4 +1,4 @@
-package kku.pj.backend.dto;
+package kku.pj.backend.dto.v1;
 
 import lombok.Data;
 

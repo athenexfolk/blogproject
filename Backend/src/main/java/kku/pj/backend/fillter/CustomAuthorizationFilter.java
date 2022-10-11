@@ -1,12 +1,8 @@
 package kku.pj.backend.fillter;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.auth0.jwt.interfaces.JWTVerifier;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import kku.pj.backend.services.V1.IJWTokenService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,11 +20,10 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
-    private final String private_key;
+    private final IJWTokenService jwTokenService;
 
-    @Autowired
-    public CustomAuthorizationFilter(@Value("${JWT.secret_key}") String private_key) {
-        this.private_key = private_key;
+    public CustomAuthorizationFilter( IJWTokenService jwTokenService) {
+        this.jwTokenService = jwTokenService;
     }
 
     @Override
@@ -39,9 +34,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
                 try {
                     String token = authorizationHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256(private_key.getBytes());
-                    JWTVerifier verifier = JWT.require(algorithm).build();
-                    DecodedJWT decoder = verifier.verify(token);
+                    DecodedJWT decoder = jwTokenService.decode(token);
 
                     String username = decoder.getSubject();
                     var role = decoder.getClaim("role").asArray(String.class);
@@ -49,15 +42,13 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     authority.add(new SimpleGrantedAuthority(role[0]));
 
                     SecurityContextHolder.getContext().setAuthentication(
-                            new UsernamePasswordAuthenticationToken( decoder.getSubject(), null, authority)
+                            new UsernamePasswordAuthenticationToken( username, null, authority)
                     );
 
-//                    filterChain.doFilter(request,response);
 
                 } catch (IllegalArgumentException e) {
                     throw new RuntimeException(e);
                 } catch (JWTVerificationException e) {
-                    System.out.println(e.getMessage());
                     response.sendError(FORBIDDEN.value());
                 }
 

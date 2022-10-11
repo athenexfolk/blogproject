@@ -44,8 +44,8 @@ interface PostContent {
     id: number
     title: string
     content: string
-    create_at: string
-    modified_at: string
+    create_at: Date
+    modified_at: Date
     user_id: string
 }
 

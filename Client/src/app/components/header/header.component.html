@@ -1,17 +1,13 @@
 <nav class="navbar navbar-expand bg-white shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="assets/img/logo.svg" width="128" /></a>
-    <div class="navbar">
+    <div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <button type="button" class="nav-link btn square-sm border" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i class="fa-solid fa-home"></i></button>
         </li>
         <li class="nav-item">
-          <button type="button" class="nav-link btn square-sm border" routerLink="/notification" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i class="fa-solid fa-bell"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            99+
-            <span class="visually-hidden">unread messages</span>
-          </span></button>
+          <button type="button" class="nav-link btn square-sm border" routerLink="/notification" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i class="fa-solid fa-bell"></i></button>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link btn square-sm border" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i class="fa-solid fa-user"></i></button>

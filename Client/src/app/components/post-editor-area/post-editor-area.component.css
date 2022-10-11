@@ -3,9 +3,31 @@
     caret-color: grey;
     resize: none;
     font-size: 1.5em;
-
 }
-.title-area:focus {
-    border: none;
-    box-shadow: none;
+
+.square-sm {
+    width: 40px !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    height: 40px !important;
+    position: relative;
+    font-size: 15px;
+    margin: 0 10px;
+    border-radius: 100px;
+    color: rgb(150, 150, 150);
+    background-color: white;
+}
+.square-sm i{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.tool-bar{
+    overflow-x: auto;
+    white-space: nowrap;
+    display: block;
+}
+.tool-wrapper{
+    display: inline-block;
 }

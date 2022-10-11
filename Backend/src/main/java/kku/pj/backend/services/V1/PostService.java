@@ -1,11 +1,12 @@
-package kku.pj.backend.services;
+package kku.pj.backend.services.V1;
 
-import kku.pj.backend.dto.PostContentDto;
-import kku.pj.backend.dto.PostThumbnailDto;
-import kku.pj.backend.entities.Post;
-import kku.pj.backend.repositories.PostRepository;
+import kku.pj.backend.dto.v1.PostContentDto;
+import kku.pj.backend.dto.v1.PostThumbnailDto;
+import kku.pj.backend.entities.V1.Post;
+import kku.pj.backend.repositories.V1.PostRepository;
 import kku.pj.backend.services.exceptions.PostIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,23 +18,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostService {
+@Qualifier("PostService")
+public class PostService implements IPostService {
 
-    final PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
+
+
+
+    @Override
     public List<PostThumbnailDto> getPostsTrumbull(){
         return postRepository.findAllThumbnail();
     }
 
+
+
+
+
+    @Override
     public Optional<Post> getPost(int id){
         return postRepository.findById(id);
     }
 
+
+
+
+
+
+    @Override
     public Page<PostThumbnailDto> getPosts(int offset, int size, Optional<String> sortByField, Optional<Direction> sortDirection){
         Sort sort = Sort.by(sortDirection.orElse(Direction.DESC), sortByField.orElse("id"));
         Pageable pageable = PageRequest.of(offset, size, sort);
@@ -41,11 +58,21 @@ public class PostService {
         return postRepository.findAllThumbnail(pageable);
     }
 
+
+
+
+
+    @Override
     public Post addPost(Post post){
         post = postRepository.save(post);
         return post;
     }
 
+
+
+
+
+    @Override
     public Post updatePost(int id, PostContentDto postContentDto) throws PostIdNotFoundException {
         Optional<Post> post = postRepository.findById(id);
 
@@ -62,6 +89,11 @@ public class PostService {
     }
 
 
+
+
+
+
+    @Override
     public void removePost(int id) throws PostIdNotFoundException {
         try{
             postRepository.deleteById(id);
@@ -69,5 +101,15 @@ public class PostService {
             throw new PostIdNotFoundException(String.format("Post ID %d is not exist.",id));
         }
     }
+
+
+
+
+
+
+
+
+
+
 
 }

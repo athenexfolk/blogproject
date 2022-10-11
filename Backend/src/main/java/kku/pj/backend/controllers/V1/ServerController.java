@@ -1,4 +1,4 @@
-package kku.pj.backend.controllers;
+package kku.pj.backend.controllers.V1;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
