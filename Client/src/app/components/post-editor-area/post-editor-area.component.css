@@ -4,7 +4,10 @@
     resize: none;
     font-size: 1.5em;
 }
-
+.title-area:focus{
+    border: none;
+    box-shadow: none;
+}
 .square-sm {
     width: 40px !important;
     max-width: 100% !important;
