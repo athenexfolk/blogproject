@@ -1,7 +1,7 @@
 package kku.pj.backend.fillter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kku.pj.backend.services.V1.IJWTokenService;
+import kku.pj.backend.utills.IJWTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
