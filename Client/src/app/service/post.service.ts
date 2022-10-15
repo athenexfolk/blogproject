@@ -6,7 +6,6 @@ import { IPostService } from './IPostService';
 
 import { environment } from '../../environments/environment';
 import { User } from 'src/models/user.request.model';
-import { url } from 'inspector';
 
 
 @Injectable({
@@ -27,7 +26,7 @@ export class PostService implements IPostService {
   getPostThumbnailPagination(page: number, size: number): Observable<PostPagination> {
     const header={
       'Content-Type': 'application/json',
-      'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWxsaXVtIiwicm9sZSI6WyJ1c2VyIl0sImlzcyI6Ii9hcGkvbG9naW4iLCJleHAiOjE2NjU0NTIxMzN9.lSQbPrllWB5SFR2F7ButN51dFPn-n93TLvUsZ7NserM`
+      'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWxsaXVtIiwicm9sZSI6WyJ1c2VyIl0sImlzcyI6Ii9hcGkvbG9naW4iLCJleHAiOjE2NjU4Mzg2MzF9.9TDn2urp7tU0QMtVwWMp9NnxrkLnxrB4KxG6-lF5rTM`
     }
 
     const url = this.getAction(`posts/${page}/${size}`)
@@ -54,12 +53,6 @@ export class PostService implements IPostService {
     
     return this.http.get<User>(url,{headers:header})
   }
-
-  
-
-
-
-
 
   private getAction(action:string):string{
     return `${environment.api_url}/${action}`;

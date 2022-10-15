@@ -13,10 +13,10 @@ export class HomeComponent implements OnInit {
   
 
   constructor(
-    private titleService:Title,
-    private postService:PostService
+    // private titleService:Title,
+    // private postService:PostService
   ) {
-    titleService.setTitle("Home");
+    // titleService.setTitle("Home");
   }
 
   ngOnInit(): void {

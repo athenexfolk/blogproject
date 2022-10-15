@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FixedButtonGroupComponent } from './fixed-button-group.component';
+import { RegisterComponent } from './register.component';
 
-describe('FixedButtonGroupComponent', () => {
-  let component: FixedButtonGroupComponent;
-  let fixture: ComponentFixture<FixedButtonGroupComponent>;
+describe('RegisterComponent', () => {
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FixedButtonGroupComponent ]
+      declarations: [ RegisterComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FixedButtonGroupComponent);
+    fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
