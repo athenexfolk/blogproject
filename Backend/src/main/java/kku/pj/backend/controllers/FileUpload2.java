@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Optional;
 
 @RestController
@@ -28,14 +29,41 @@ public class FileUpload2 {
         this.author = author;
     }
 
+    @PostMapping("upload/base64")
+    public ResponseEntity<Object> uploadbase64(@RequestBody String file, @CurrentSecurityContext SecurityContext securityContext){
+        String username = author.getUsernameFromContext(securityContext);
+        if(username.equals(author.ANONYMOUS_USER))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        try {
+            String type = file.substring(file.indexOf("image/"),file.indexOf(";base64,"));
+            file = file.substring(file.indexOf(";base64,")+8);
+            byte[] img = Base64.getDecoder().decode(file);
+            String path = imageService.saveImgToFileSystem(img,type);
+            System.out.println(path);
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.setUsername(username);
+            imageEntity.setUrl(path);
+
+            imageEntity = imageService.add(imageEntity);
+            return ResponseEntity.ok(new ImageEntityDto(imageEntity));
+
+        } catch (IOException e) {
+            return  new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
+    }
+
 
     @PostMapping(value = "/upload/image" )
     public ResponseEntity<ImageEntityDto> uplaodImage(
-            @RequestParam("image") Optional<MultipartFile> file,
-            @RequestParam Optional<String> atl,
-            @RequestParam Optional<String> name,
+            @RequestBody Optional<MultipartFile> file,
+            @RequestBody Optional<String> atl,
+            @RequestBody Optional<String> name,
             @CurrentSecurityContext SecurityContext securityContext
-    ) {
+    ){
+
+        if(file.isEmpty()) return  new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+
         String type = file.get().getContentType();
         String username = author.getUsernameFromContext(securityContext);
 

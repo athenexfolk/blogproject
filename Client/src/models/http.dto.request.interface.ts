@@ -22,7 +22,25 @@ interface IProfileUpdateReqDto {
     imgId: number | null;
 }
 
+interface IPostAddReqDto {
+    imgId: number | null
+    title: string
+    content: string
+    shortContent: any
+}
+
+interface IPostUpdateReqDto {
+    title: string
+    content: string
+  }
+
+interface IImageUploadDto{
+    image:File,
+    alt:string,
+    name:string
+}
 
 
 
-export { ILoginReqDto, IProfileReqDto, IProfileUpdateReqDto, IRegisterReqDto, }
+
+export { ILoginReqDto, IProfileReqDto, IProfileUpdateReqDto, IRegisterReqDto, IPostAddReqDto, IPostUpdateReqDto, IImageUploadDto}
