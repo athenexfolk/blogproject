@@ -16,10 +16,10 @@ interface IProfileReqDto {
 }
 
 interface IProfileUpdateReqDto {
-    password: string;
+    password: string | null;
     old_password: string;
-    email: string;
-    imgId?: number;
+    email: string | null;
+    imgId: number | null;
 }
 
 

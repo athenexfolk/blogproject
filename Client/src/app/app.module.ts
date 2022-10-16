@@ -14,6 +14,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostComponent } from './components/post/post.component';
 import { AddTextComponent } from './components/tools/add-text/add-text.component';
+import { TmpComponent } from './testservice/tmp/tmp.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddTextComponent } from './components/tools/add-text/add-text.component
     NotificationComponent,
     ProfileComponent,
     PostComponent,
-    AddTextComponent
+    AddTextComponent,
+    TmpComponent
   ],
   imports: [
     BrowserModule,
