@@ -1,6 +1,5 @@
 
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef} from '@angular/core';
-import { AddTextComponent } from '../tools/add-text/add-text.component';
+import { Component, OnInit} from '@angular/core';
 
 declare var tinymce: any;
 @Component({
@@ -10,57 +9,57 @@ declare var tinymce: any;
 })
 export class PostEditorAreaComponent implements OnInit {
 
-  public bodyEditor?:HTMLElement
+  public title:String = ``;
+  public data:any = []
 
-  @ViewChild("mainBody", { read: ViewContainerRef }) target!: ViewContainerRef;
+  constructor() { }
 
-  child_unique_key: number = 0;
+  sendData(e:Event){
+    let box = document.getElementById("post-text")!
+    let boxChildren = box.childNodes
 
-  componentsReferences = Array<ComponentRef<AddTextComponent>>()
-
-  // @ViewChild("mainBody", {static:false, read: ViewContainerRef}) target!:ViewContainerRef;
-  
-  // private componentRef!: ComponentRef<any>
-
-  constructor(
-    private resolver: ComponentFactoryResolver
-  ) { }
-
-  addText(){
-    let componentFactory = this.resolver.resolveComponentFactory(AddTextComponent)
-    let childComponentRef = this.target.createComponent(componentFactory)
-    let childComponent = childComponentRef.instance
-    childComponent.unique_key = ++this.child_unique_key
-    childComponent.parentRef = this
-    this.componentsReferences.push(childComponentRef)
-    console.log(this.componentsReferences);
-    console.log(this.target);
+    boxChildren.forEach( el => {
+      let rawData = {
+        "tag": el.nodeName,
+        "text": el.textContent
+      }
+      this.data.push(rawData)
+      console.log(this.data)
+    })
+    console.log(this.data);
     
   }
 
-  remove(key: number) {
-    if (this.target.length < 1) return;
+  newLine(e:Event){
+    let box = document.getElementById("post-text")!
+    let p = document.createElement("p")
+    p.setAttribute("contentEditable","True")
+    p.setAttribute("style","border: 2px black;caret-color: grey;resize: none;font-size: 1em;")
+    p.addEventListener("focus", ()=>{
+      p.style.outline = "none"
+      p.style.border = "none"
+      p.style.boxShadow = "none"
+    })
+    box.appendChild(p)
+    p.focus()
+  }
 
-    let componentRef = this.componentsReferences.filter(
-      x => x.instance.unique_key == key
-    )[0];
+  boldText(){
+    let text = "<b>"+this.selectText()+"<b>"
     
-    console.log(componentRef.instance);
+  }
+  selectText():String{
+    let selection:any;
+    if (window.getSelection) {
+      selection = window.getSelection();
+    } else if (selection) {
+      selection = selection.createRange();
+    }
+    return selection.toString()
     
-
-    let vcrIndex: number = this.target.indexOf(componentRef as any);
-    
-    // removing component from container
-    this.target.remove(vcrIndex);
-
-    // removing component from the list
-    this.componentsReferences = this.componentsReferences.filter(
-      x => x.instance.unique_key !== key
-    );
   }
 
   ngOnInit(): void {
-    this.bodyEditor = document.getElementById('main-body')!;
   }
 
 }

@@ -8,6 +8,22 @@
     border: none;
     box-shadow: none;
 }
+
+.text-area, .text-box{
+    border: none;
+    caret-color: grey;
+    resize: none;
+    font-size: 1em;
+}
+
+.text-area:focus,
+.text-box:focus{
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+
 .square-sm {
     width: 40px !important;
     max-width: 100% !important;

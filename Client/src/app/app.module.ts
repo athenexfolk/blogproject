@@ -12,11 +12,12 @@ import { BodyComponent } from './components/body/body.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostComponent } from './components/post/post.component';
-import { AddTextComponent } from './components/tools/add-text/add-text.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomePostComponent } from './components/home-post/home-post.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { BoldComponent } from './components/tools/bold/bold.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,16 +30,17 @@ import { RegisterComponent } from './pages/register/register.component';
     NotificationComponent,
     ProfileComponent,
     PostComponent,
-    AddTextComponent,
     PaginationComponent,
     LoginComponent,
     HomePostComponent,
-    RegisterComponent
+    RegisterComponent,
+    BoldComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

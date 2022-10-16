@@ -1,17 +1,10 @@
-<div class="container-fluid bg-white post-editor-container min-vh-100">
-    <div class="form-group my-3">
-        <textarea rows="1" class="form-control title-area" id="post-title" placeholder="Title..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
-        <hr>
-        <ng-template #mainBody></ng-template>
-    </div>
-</div>
-<div class="container-fluid text-center border sticky-bottom bg-light">
+<div class="container-fluid text-center border sticky-top bg-light">
     <div class="tool-bar p-3">
         <div class="tool-wrapper">
-            <button class="btn rounded square-sm shadow-sm" (click)="addText()"><i class="fa-solid fa-pencil"></i></button>
+            <button class="btn rounded square-sm shadow-sm" (click)="newLine($event)"><i class="fa-solid fa-paragraph"></i></button>
         </div>
         <div class="tool-wrapper">
-            <button class="btn rounded square-sm shadow-sm"><i class="fa-solid fa-bold"></i></button>
+            <button class="btn rounded square-sm shadow-sm" (click)="boldText()"><i class="fa-solid fa-bold"></i></button>
         </div>
         <div class="tool-wrapper">
             <button class="btn rounded square-sm shadow-sm"><i class="fa-solid fa-underline"></i></button>
@@ -24,6 +17,21 @@
         </div>
         <div class="tool-wrapper">
             <button class="btn rounded square-sm shadow-sm"><i class="fa-solid fa-list"></i></button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-white post-editor-container min-vh-100">
+    <div class="form-group my-3">
+        <div rows="1" class="form-control title-area" id="post-title" textContent="Title..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' contenteditable="true">Title...</div>
+        <hr>
+        <div class="post-text" id="post-text" oninput='this.style.height = "";this.style.height = (this.scrollHeight+5) + "px"'>
+            <p contenteditable="true" class="text-box">...</p>
+        </div>
+        <hr>
+        <div class="text-end">
+            <button class="btn btn-primary" (click)="sendData($event)">
+                Post
+            </button>
         </div>
     </div>
 </div>
